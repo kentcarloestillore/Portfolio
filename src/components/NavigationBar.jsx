@@ -5,6 +5,7 @@ import fil from '../constants/lang/fil';
 import jap from '../constants/lang/jap';
 import ru from '../constants/lang/ru';
 import { useLocation, Link } from 'react-router-dom';
+import { Link as ScrollLink } from "react-scroll";
 
 function NavigationBar({ setLang, setSelectedLang, selectedLang }) {
   const [clickedLang, setClickedLang] = useState(null);
@@ -49,10 +50,18 @@ function NavigationBar({ setLang, setSelectedLang, selectedLang }) {
           </li>
         ) : (
           <>
-            <li><a href="#home-section">Home</a></li>
-            <li><a href="#about-section">About</a></li>
-            <li><a href="#resume-section">Resume</a></li>
-            <li><a href="#contact-section">Contact</a></li>
+            <ScrollLink to="home-section" smooth={false} duration={500}>
+              Home
+            </ScrollLink>
+            <ScrollLink to="about-section" smooth={false} duration={500}>
+              About
+            </ScrollLink>
+            <ScrollLink to="resume-section" smooth={false} duration={500}>
+              Resume
+            </ScrollLink>
+            <ScrollLink to="contact-section" smooth={false} duration={500}>
+              Contact
+            </ScrollLink>
 
             <li className="dropdown">
               <span>Settings</span>
