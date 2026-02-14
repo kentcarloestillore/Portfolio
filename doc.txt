@@ -1,0 +1,238 @@
+src/
+├─ assets/          # images, icons, fonts
+├─ components/      # reusable UI components
+├─ pages/           # full pages (routes)
+├─ layouts/         # page layouts (Navbar + Footer)
+├─ styles/          # global styles (optional)
+├─ App.jsx
+├─ main.jsx
+
+App.jsx  // App.jsx should only define routes
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Projects from "./pages/Projects";
+import Contact from "./pages/Contact";
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;
+
+MainLayout.jsx
+
+import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+
+const MainLayout = () => {
+  return (
+    <>
+      <Navbar />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
+    </>
+  );
+};
+
+export default MainLayout;
+
+
+
+nav bar
+import { Link } from "react-router-dom";
+
+function NavigationBar() {
+  return (
+    <nav className="navigation-bar-section">
+      <div className="nav-logo">
+        <Link to="/">MyApp</Link>
+      </div>
+
+      <ul className="nav-links">
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/services">Services</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
+      </ul>
+    </nav>
+  );
+}
+
+export default NavigationBar;
+
+
+blue theme
+color: #38bdf8;
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+.resume-section {
+  min-height: 100vh;
+  padding: 6rem 8%;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  display: flex;
+  align-items: center;
+
+  /* Keep original red gradient background */
+  background: linear-gradient(135deg, #ff0000, #7c0303, #3a0000);
+}
+
+.resume-container {
+  width: 100%;
+  display: flex;
+  gap: 4rem;
+}
+
+/* LEFT SIDE */
+.left-content {
+  width: 50%;
+}
+
+.left-content h2 {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.left-content h2::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  background: #ff6600;
+  left: 0;
+  bottom: -8px;
+  border-radius: 2px;
+}
+
+.resume-card {
+  background: rgba(15, 15, 15, 0.6); /* dark glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 1.6rem;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(8px); /* adds glass blur effect */
+}
+
+.resume-card h3 {
+  color: #ff6600;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.resume-card p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.resume-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.resume-card li {
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.resume-card span {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* BUTTON */
+.resume-button {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 30px;
+  border: 1px solid #ff6600;
+  color: #ff6600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.resume-button:hover {
+  background: #ff6600;
+  color: #3a0000; /* darker background color when button hovered */
+  transform: translateX(6px);
+}
+
+/* RIGHT SIDE */
+.right-content {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resume-preview {
+  background: rgba(15, 15, 15, 0.6); /* dark glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 1.2rem;
+  backdrop-filter: blur(8px);
+}
+
+.resume-image {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media screen and (max-width: 900px) {
+  .home-section {
+    flex-direction: column; /* stack left-content above right-content */
+    align-items: center;
+    text-align: center;
+  }
+
+  .left-content, .right-content {
+    width: 100%;
+    flex: none;
+  }
+
+  .introduction {
+    margin-left: 0; /* remove left margin for small screens */
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+
+  .button-group {
+    justify-content: center;
+  }
+
+  .profile-image {
+    margin-top: 2rem;
+  }
+}
